@@ -42,8 +42,12 @@ public class ProductController {
     public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
         return productService.getProductById(id)
                 .map(existingProduct -> {
-                    productDetails.setId(id);
-                    Product updatedProduct = productService.saveProduct(productDetails);
+                    if (productDetails.getName() != null) existingProduct.setName(productDetails.getName());
+                    if (productDetails.getDescription() != null) existingProduct.setDescription(productDetails.getDescription());
+                    if (productDetails.getPrice() != null) existingProduct.setPrice(productDetails.getPrice());
+                    if (productDetails.getStock() != null) existingProduct.setStock(productDetails.getStock());
+                    if (productDetails.getImageUrl() != null) existingProduct.setImageUrl(productDetails.getImageUrl());
+                    Product updatedProduct = productService.saveProduct(existingProduct);
                     return ResponseEntity.ok(updatedProduct);
                 })
                 .orElse(ResponseEntity.notFound().build());
