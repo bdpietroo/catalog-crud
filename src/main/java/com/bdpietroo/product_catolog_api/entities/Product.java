@@ -10,19 +10,19 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "produtos")
+@Table(name = "tb_product")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Produto {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String nome;
-    private String descricao;
-    private BigDecimal preco;
-    private Integer quantidadeEstoque;
+    private String name;
+    private String description;
+    private BigDecimal price;
+    private Integer stock;
+    private String imageUrl;
 }
